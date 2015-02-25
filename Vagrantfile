@@ -38,9 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # any other machines on the same network, but cannot be accessed (through this
   # network interface) by any external networks.
   # config.vm.network :private_network, type: 'dhcp'
-  # config.vm.network :forwarded_port, guest: 3000, host: 3000
-  # config.vm.network :forwarded_port, guest: 5000, host: 5000
-  # config.vm.network :forwarded_port, guest: 8080, host: 8080
+  config.vm.network :forwarded_port, guest: 8080, host: 8080
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -85,37 +83,33 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
-      rvm: {
-        rubies: ["2.1.5"],
-        default_ruby: "2.1.5",
-        vagrant: { system_chef_solo: "/opt/chef/bin/chef-solo" }
-      },
-      :nginx => {
-        :version => "1.6.2",
-        :dir => "/etc/nginx",
-        :log_dir => "/var/log/nginx",
-        :binary => "/opt/nginx-1.6.2/sbin",
-        :init_style => "init",
-        :source => {
-          :modules => ['clojure-stack::nginx_clojure'],
-          :checksum => "b5608c2959d3e7ad09b20fc8f9e5bd4bc87b3bc8ba5936a513c04ed8f1391a18"
+      nginx: {
+        version:    "1.6.2",
+        dir:        "/etc/nginx",
+        log_dir:    "/var/log/nginx",
+        binary:     "/opt/nginx-1.6.2/sbin",
+        init_style: "init",
+        source: {
+          modules: ['clojure-stack::nginx_clojure'],
+          checksum: "b5608c2959d3e7ad09b20fc8f9e5bd4bc87b3bc8ba5936a513c04ed8f1391a18"
         }
       },
-      clojure_apps: [
-        {
-          name: 'hello',
-          port: '8080', 
-          ubarjar: '/home/vagrant/hello-world/target/hello-world-0.1.0-SNAPSHOT.jar',
-          handler: 'hello-world.core/handler' 
-        }
-      ],
-      "java" => {
-        "install_flavor" => "oracle",
-        "jdk_version" => "7",
-        "oracle" => {
-          "accept_oracle_download_terms" => true
+      java: {
+        install_flavor: "oracle",
+        jdk_version: "7",
+        oracle: {
+          accept_oracle_download_terms: true
         }
       }
+      clojure_apps: [
+        {
+          name:    'hello',
+          port:    '8080', 
+          ubarjar: '/home/vagrant/hello-world/target/hello-world-0.1.0-SNAPSHOT.jar',
+          handler: 'hello-world.core/handler' ,
+          git:     'git://github.com/newtonlabs/hello-world.git'
+        }
+      ],
     }
 
     chef.run_list = [

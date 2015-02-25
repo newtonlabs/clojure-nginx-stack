@@ -1,24 +1,29 @@
-# clojure-stack-cookbook
+# clojure-nginx-stack-cookbook
 
-Download:
+### Prereq Downloads:
 
-https://downloads.chef.io/chef-dk/
-http://www.vagrantup.com/downloads.html
-https://www.virtualbox.org/wiki/Downloads
+* [Chef DK](https://downloads.chef.io/chef-dk/)
+* [Vagrant](http://www.vagrantup.com/downloads.html)
+* [Virtual Box](https://www.virtualbox.org/wiki/Downloads)
 
-TODO: Enter the cookbook description here.
+### Instructions
 
-SCP Command:
-`scp -P 2222 nginx-clojure-0.3.0.tar.gz vagrant@127.0.0.1:/tmp`
-
-Mysql Command line:
-`mysql -h 127.0.0.1 --passsword=password --user=root`
-
-
-## Error on chef folders not synced, this may go away with rsync
-```bash
-rm .vagrant/machines/default/virtualbox/synced_folders
-vagrant reload --provision
+```
+vagrant up
 ```
 
-# clojure-nginx-stack
+### Helpful vagrant commands
+
+```bash
+# ssh to the box
+vagrant ssh
+
+# SCP example:
+scp -P 2222 nginx-clojure-0.3.0.tar.gz vagrant@127.0.0.1:/tmp
+
+# Mysql command line:
+mysql -h 127.0.0.1 --passsword=password --user=root
+
+# Mongo command line:
+mongo
+```
