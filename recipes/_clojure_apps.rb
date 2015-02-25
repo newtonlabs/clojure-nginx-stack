@@ -19,7 +19,12 @@ node[:clojure_apps].each do |app|
     owner  'root'
     group  node['root_group']
     mode   '0644'
-    variables :app => {:port => app[:port], :name => app[:name]}
+    variables :app => {
+      :port    => app[:port], 
+      :name    => app[:name], 
+      :uberjar => app[:uberjar], 
+      :handler => app[:handler]
+    }
     notifies :reload, 'service[nginx]'
   end
 end

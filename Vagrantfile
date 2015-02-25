@@ -105,7 +105,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         {
           name:    'hello',
           port:    '8080', 
-          ubarjar: '/home/vagrant/hello-world/target/hello-world-0.1.0-SNAPSHOT.jar',
+          uberjar: '/home/vagrant/hello/target/hello-world-0.1.0-SNAPSHOT-standalone.jar',
           handler: 'hello-world.core/handler',
           git:     'git://github.com/newtonlabs/hello-world.git'
         }

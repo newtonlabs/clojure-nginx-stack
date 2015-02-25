@@ -12,7 +12,7 @@
 vagrant up
 ```
 
-* Goto: [http://localhost:8080](http://localhost:8080)
+* Goto: [http://localhost:8080/hello](http://localhost:8080/hello)
 
 ### Helpful vagrant commands
 
@@ -28,4 +28,20 @@ mysql -h 127.0.0.1 --passsword=password --user=root
 
 # Mongo command line:
 mongo
+```
+
+### What is going on here??
+
+Using Chef to show how nginx-clojure works with external ring handler
+
+* Creates vm
+* Installs Java
+* Installs mongo and mysql
+* Compiles nginx with nginx-clojure moduule
+* Deploys sample hello world application
+* Configures nginx
+
+Nginx Sample config:
+
+```nginx
 ```

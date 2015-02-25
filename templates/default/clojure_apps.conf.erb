@@ -8,7 +8,7 @@ jvm_var uberjar '<%=@app[:uberjar]%>';
 jvm_options "-Djava.class.path=/opt/nginx-clojure-0.3.0.jar:#{uberjar}";
 
 server {
-  listen <%= @app[:port] %>;;
+  listen <%= @app[:port] %>;
   server_name localhost;
   location /<%=@app[:name]%> {
     content_handler_type 'clojure';
