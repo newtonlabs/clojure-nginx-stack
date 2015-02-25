@@ -43,5 +43,29 @@ Using Chef to show how nginx-clojure works with external ring handler
 
 Nginx Sample config:
 
+```bash
+
+# Located in (Created by Chef recipes: templates/default/clojure_apps.conf.erb)
+/etc/nginx/conf.d/hello.conf
+
+```
+
 ```nginx
+### jvm dynamic library path
+jvm_path '/usr/lib/jvm/jdk1.7.0_75/jre/lib/amd64/server/libjvm.so';
+
+### application uberjar
+jvm_var uberjar '/home/vagrant/hello/target/hello-world-0.1.0-SNAPSHOT-standalone.jar';
+
+### my app classpath
+jvm_options "-Djava.class.path=/opt/nginx-clojure-0.3.0.jar:#{uberjar}";
+
+server {
+  listen 8080;
+  server_name localhost;
+  location /hello {
+    content_handler_type 'clojure';
+    content_handler_name 'hello-world.core/handler';
+  }
+}
 ```
