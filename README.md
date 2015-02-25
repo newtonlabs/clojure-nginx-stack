@@ -12,6 +12,8 @@
 vagrant up
 ```
 
+Goto: [http://localhost:8080](http://localhost:8080)
+
 ### Helpful vagrant commands
 
 ```bash
