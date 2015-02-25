@@ -1,0 +1,17 @@
+### jvm dynamic library path
+jvm_path '/usr/lib/jvm/jdk1.7.0_75/jre/lib/amd64/server/libjvm.so';
+
+### my app jars e.g. clojure-1.5.1.jar , groovy-2.3.4.jar ,etc.
+jvm_var uberjar '<%=@app[:uberjar]%>';
+
+### my app classpath, windows user should use ';' as the separator
+jvm_options "-Djava.class.path=/opt/nginx-clojure-0.3.0.jar:#{uberjar}";
+
+server {
+  listen <%= @app[:port] %>;;
+  server_name localhost;
+  location /<%=@app[:name]%> {
+    content_handler_type 'clojure';
+    content_handler_name '<%=@app[:handler]%>';
+  }
+}
