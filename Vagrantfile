@@ -100,13 +100,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         oracle: {
           accept_oracle_download_terms: true
         }
-      }
+      },
       clojure_apps: [
         {
           name:    'hello',
           port:    '8080', 
           ubarjar: '/home/vagrant/hello-world/target/hello-world-0.1.0-SNAPSHOT.jar',
-          handler: 'hello-world.core/handler' ,
+          handler: 'hello-world.core/handler',
           git:     'git://github.com/newtonlabs/hello-world.git'
         }
       ],
